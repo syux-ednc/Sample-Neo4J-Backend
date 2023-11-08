@@ -32,6 +32,12 @@ public interface InfoObjRepository extends Neo4jRepository<InfoObj, String> {
             "RETURN node")
     void updateInfoObjStatus(String name, String oldStatus, String newStatus);
 
+    @Query("MATCH (d:INFO_OBJ {name: $name})<-[*]-(relatedNode) " +
+            "WITH COLLECT(relatedNode) AS ancestorNodes " +
+            "FOREACH (node IN ancestorNodes | SET node.status = $status) " +
+            "RETURN ancestorNodes")
+    void updateAncestorInfoObjsStatus(String name, String status);
+
     @Query("MATCH (node:INFO_OBJ {name: $name}) " +
             "DELETE node")
     void deleteInfoObjByName(String name);

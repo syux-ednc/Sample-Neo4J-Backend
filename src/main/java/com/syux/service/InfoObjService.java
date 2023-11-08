@@ -36,6 +36,10 @@ public class InfoObjService {
         infoObjRepository.updateInfoObjStatus(name, oldStatus, newStatus);
     }
 
+    public void updateAncestorInfoObjsStatus(String name, String status){
+        infoObjRepository.updateAncestorInfoObjsStatus(name, status);
+    }
+
     public void deleteInfoObjByName(String name) {
         infoObjRepository.deleteInfoObjByName(name);
     }

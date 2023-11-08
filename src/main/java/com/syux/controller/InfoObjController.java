@@ -50,6 +50,19 @@ public class InfoObjController {
         }
     }
 
+    @PostMapping("/updateAncestorInfoObjsStatus")
+    public ResponseEntity<Object> updateInfoObjStatus(
+            @RequestParam String name,
+            @RequestParam String status
+    ) {
+        try {
+            infoObjService.updateAncestorInfoObjsStatus(name, status);
+            return ResponseEntity.status(HttpStatus.OK).body("SUCCESS");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("ERROR: " + e.getMessage());
+        }
+    }
+
     @DeleteMapping("/deleteInfoObjByName")
     public ResponseEntity<Object> deleteInfoObjByName(@RequestParam String name) {
         try {
